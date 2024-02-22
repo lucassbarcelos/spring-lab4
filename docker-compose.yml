@@ -1,0 +1,17 @@
+version: '3.1' # Use whatever version is appropriate
+
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: admin # Root password
+      MYSQL_DATABASE: db         # Optional: Creates a database
+      MYSQL_USER: admin                 # Optional: Creates a new user
+      MYSQL_PASSWORD: admin     # Password for the new user
+    ports:
+      - "3306:3306"
+    volumes:
+      - my-db:/var/lib/mysql
+
+volumes:
+  my-db:
