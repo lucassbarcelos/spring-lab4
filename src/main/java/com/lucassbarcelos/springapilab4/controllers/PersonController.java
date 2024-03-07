@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lucassbarcelos.springapilab4.model.Person;
+import com.lucassbarcelos.springapilab4.entity.Person;
 import com.lucassbarcelos.springapilab4.service.PersonService;
 
 @RestController

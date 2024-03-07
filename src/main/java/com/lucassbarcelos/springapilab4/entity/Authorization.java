@@ -1,26 +1,32 @@
-package com.lucassbarcelos.springapilab4.model;
+package com.lucassbarcelos.springapilab4.entity;
+
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "usr_usuario")
-public class User {
+@Table(name = "aut_autorizacao")
+public class Authorization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "usr_id")
+    @Column(name = "aut_id")
     private Long id;
 
-    @Column(name = "usr_nome")
+    @Column(name = "aut_nome")
     private String name;
 
-    @Column(name = "usr_senha")
-    private String password;
+    @ManyToMany(mappedBy = "authorizations")
+    @JsonIgnore
+    private Set<User> users;
 
     public Long getId() {
         return id;
@@ -38,11 +44,11 @@ public class User {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

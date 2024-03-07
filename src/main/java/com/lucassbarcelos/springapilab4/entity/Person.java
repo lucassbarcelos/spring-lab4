@@ -1,4 +1,4 @@
-package com.lucassbarcelos.springapilab4.model;
+package com.lucassbarcelos.springapilab4.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -5,11 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.lucassbarcelos.springapilab4.model.User;
+import com.lucassbarcelos.springapilab4.entity.User;
 import com.lucassbarcelos.springapilab4.repository.UserRepository;
 
 @Service

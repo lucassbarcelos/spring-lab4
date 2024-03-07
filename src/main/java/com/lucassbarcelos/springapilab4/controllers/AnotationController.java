@@ -8,30 +8,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lucassbarcelos.springapilab4.entity.User;
-import com.lucassbarcelos.springapilab4.service.UserService;
+import com.lucassbarcelos.springapilab4.entity.Anotation;
+import com.lucassbarcelos.springapilab4.service.AnotationService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.websocket.server.PathParam;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/anotation")
+public class AnotationController {
     @Autowired
-    UserService userService;
+    AnotationService anotationService;
 
     @GetMapping()
-    public List<User> getAll() {
-        return userService.getAll();
+    public List<Anotation> getAll() {
+        return anotationService.getAll();
     }
 
     @PostMapping()
-    public User save(@RequestBody User user) {
-        return userService.save(user);
+    public Anotation save(@RequestBody Anotation anotation) {
+        return anotationService.save(anotation);
     }
 
     @GetMapping("/{id}")
-    public User getById(@PathParam("id") Long id) {
-        return userService.findById(id);
+    public Anotation getById(@PathParam("id") Long id) {
+        return anotationService.findById(id);
     }
 }

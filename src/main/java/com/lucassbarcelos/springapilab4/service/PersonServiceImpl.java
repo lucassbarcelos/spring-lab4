@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lucassbarcelos.springapilab4.model.Person;
+import com.lucassbarcelos.springapilab4.entity.Person;
 import com.lucassbarcelos.springapilab4.repository.PersonRepository;
 
 @Service
