@@ -1,20 +1,27 @@
 package com.lucassbarcelos.springapilab4.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.lucassbarcelos.springapilab4.entity.Authorization;
 import com.lucassbarcelos.springapilab4.entity.User;
+import com.lucassbarcelos.springapilab4.repository.AuthorizationRepository;
 import com.lucassbarcelos.springapilab4.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepo;
+
+    @Autowired
+    AuthorizationRepository authorizationRepo;
 
     @Override
     public List<User> getAll() {
@@ -26,6 +33,16 @@ public class UserServiceImpl implements UserService {
         if (validadeUser(user)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No user send");
         }
+        if (user.getAuthorizations() != null && !user.getAuthorizations().isEmpty()) {
+            Set<Authorization> authorizations = new HashSet<Authorization>(user.getAuthorizations());
+
+            Set<Long> authorizationIds = new HashSet<Long>();
+
+            authorizations.forEach(item -> authorizationIds.add(item.getId()));
+
+            user.setAuthorizations(new HashSet<Authorization>(authorizationRepo.findAllById(authorizationIds)));
+        }
+
         User savedUser = userRepo.save(user);
 
         return savedUser;

@@ -72,4 +72,8 @@ public class User {
     public Set<Authorization> getAuthorizations() {
         return authorizations;
     }
+
+    public void setAuthorizations(HashSet<Authorization> authorizations) {
+        this.authorizations = authorizations;
+    }
 }

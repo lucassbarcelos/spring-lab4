@@ -1,5 +1,6 @@
 package com.lucassbarcelos.springapilab4.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,13 +10,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.lucassbarcelos.springapilab4.entity.Anotation;
-import com.lucassbarcelos.springapilab4.entity.Anotation;
 import com.lucassbarcelos.springapilab4.repository.AnotationRepository;
 
 @Service
 public class AnotationServiceImpl implements AnotationService {
     @Autowired
     AnotationRepository anotationRepo;
+
+    @Autowired
+    UserService userService;
 
     @Override
     public List<Anotation> getAll() {
@@ -27,16 +30,23 @@ public class AnotationServiceImpl implements AnotationService {
         if (validadeAnotation(anotation)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No anotation send");
         }
+
+        anotation.setUser(userService.findById(anotation.getUser().getId()));
+
         Anotation savedAnotation = anotationRepo.save(anotation);
 
         return savedAnotation;
     }
 
     private Boolean validadeAnotation(Anotation anotation) {
-        if (anotation == null || anotation.getDateTime() == null || anotation.getText().isBlank()
+        if (anotation == null || anotation.getText().isBlank()
                 || anotation.getText() == null
-                || anotation.getUser() == null) {
+                || anotation.getUser() == null || anotation.getUser().getId() == null) {
+
             return true;
+        }
+        if (anotation.getDateTime() == null) {
+            anotation.setDateTime(LocalDateTime.now());
         }
         return false;
     }

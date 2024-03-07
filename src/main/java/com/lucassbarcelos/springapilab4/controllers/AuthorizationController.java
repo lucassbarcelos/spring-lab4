@@ -9,28 +9,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lucassbarcelos.springapilab4.entity.Anotation;
-import com.lucassbarcelos.springapilab4.service.AnotationService;
+import com.lucassbarcelos.springapilab4.entity.Authorization;
+import com.lucassbarcelos.springapilab4.service.AuthorizationService;
+
 import jakarta.websocket.server.PathParam;
 
 @RestController
-@RequestMapping("/anotation")
-public class AnotationController {
+@RequestMapping("/authorization")
+public class AuthorizationController {
     @Autowired
-    AnotationService anotationService;
+    AuthorizationService authorizationService;
 
     @GetMapping()
-    public List<Anotation> getAll() {
-        return anotationService.getAll();
+    public List<Authorization> getAll() {
+        return authorizationService.getAll();
     }
 
     @PostMapping()
-    public Anotation save(@RequestBody Anotation anotation) {
-        return anotationService.save(anotation);
+    public Authorization save(@RequestBody Authorization authorization) {
+        return authorizationService.save(authorization);
     }
 
     @GetMapping("/{id}")
-    public Anotation getById(@PathParam("id") Long id) {
-        return anotationService.findById(id);
+    public Authorization getById(@PathParam("id") Long id) {
+        return authorizationService.findById(id);
     }
 }
