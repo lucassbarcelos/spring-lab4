@@ -33,19 +33,24 @@ public class UserServiceImpl implements UserService {
         if (validadeUser(user)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No user send");
         }
+
         if (user.getAuthorizations() != null && !user.getAuthorizations().isEmpty()) {
-            Set<Authorization> authorizations = new HashSet<Authorization>(user.getAuthorizations());
-
-            Set<Long> authorizationIds = new HashSet<Long>();
-
-            authorizations.forEach(item -> authorizationIds.add(item.getId()));
-
-            user.setAuthorizations(new HashSet<Authorization>(authorizationRepo.findAllById(authorizationIds)));
+            setAuthorizations(user);
         }
 
         User savedUser = userRepo.save(user);
 
         return savedUser;
+    }
+
+    private void setAuthorizations(User user) {
+        Set<Authorization> authorizations = new HashSet<Authorization>(user.getAuthorizations());
+
+        Set<Long> authorizationIds = new HashSet<Long>();
+
+        authorizations.forEach(item -> authorizationIds.add(item.getId()));
+
+        user.setAuthorizations(new HashSet<Authorization>(authorizationRepo.findAllById(authorizationIds)));
     }
 
     private Boolean validadeUser(User user) {
