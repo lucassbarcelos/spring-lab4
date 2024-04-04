@@ -3,6 +3,7 @@ package com.lucassbarcelos.springapilab4.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @CrossOrigin("http://localhost:5173/")
     @GetMapping()
     public List<User> getAll() {
         return userService.getAll();
