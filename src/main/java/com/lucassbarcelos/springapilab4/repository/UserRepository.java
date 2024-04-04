@@ -29,4 +29,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select u from User u join u.authorizations a where a.name = ?1")
     public List<User> getByAuthorizationsNameQuery(String authName);
+
+    public Integer countByNameContains(String name);
 }
