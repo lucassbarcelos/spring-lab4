@@ -13,5 +13,18 @@ services:
     volumes:
       - my-db:/var/lib/mysql
 
+  sql_server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sql_server
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=admin@12345
+    volumes:
+      - sql_data:/var/opt/mssql
+
+
 volumes:
   my-db:
+  sql_data:
