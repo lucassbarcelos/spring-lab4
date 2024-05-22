@@ -10,5 +10,5 @@ public interface BodyService {
 
     public Body save(Body body);
 
-    public List<Body> getByNameAndDiameterGreaterThenZero(String name);
+    public List<Body> getByNameAndDiameter(String name, Integer diameter);
 }

@@ -9,6 +9,6 @@ import com.lucassbarcelos.springapilab4.entity.Body;
 
 public interface BodyRepository extends JpaRepository<Body, Long> {
 
-    @Query("select b from Body b where b.name like %?1% or b.diameter > 0")
-    public List<Body> getByNameLike(String name);
+    @Query("select b from Body b where b.name like %?1% or b.diameter > ?2")
+    public List<Body> getByNameLikeOrDiameter(String name, Integer diameter);
 }

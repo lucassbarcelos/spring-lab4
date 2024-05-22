@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.lucassbarcelos.springapilab4.entity.Body;
 import com.lucassbarcelos.springapilab4.repository.BodyRepository;
 
+@Service
 public class BodyServiceImpl implements BodyService {
     @Autowired
     BodyRepository bodyRepo;
@@ -30,14 +32,14 @@ public class BodyServiceImpl implements BodyService {
     }
 
     @Override
-    public List<Body> getByNameAndDiameterGreaterThenZero(String name) {
-        return bodyRepo.getByNameLike(name);
+    public List<Body> getByNameAndDiameter(String name, Integer diameter) {
+        return bodyRepo.getByNameLikeOrDiameter(name, diameter);
     }
 
     private Boolean validadeBody(Body body) {
         if (body == null || body.getName() == null || body.getName().isBlank() || body.getDescription() == null
                 || body.getDescription().isBlank() || body.getDiameter() == null
-                || body.getDiameter().equals(0)) {
+                || body.getDiameter() <= 0) {
             return true;
         }
         return false;
